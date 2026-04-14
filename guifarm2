@@ -110,9 +110,18 @@ e.Position = UDim2.new(0, 20, 0, 20)
 e.Selectable = true
 e.Size = UDim2.new(0, 200, 0, 200)
 e.Image = "rbxassetid://2851926732"
-e.ImageColor3 = Color3.fromRGB(30, 30, 45)
+e.ImageColor3 = Color3.new(1, 1, 1)
 e.ScaleType = Enum.ScaleType.Slice
 e.SliceCenter = Rect.new(12, 12, 12, 12)
+-- Degradado vertical rojo -> azul en la ventana
+local windowGradient = Instance.new("UIGradient")
+windowGradient.Parent = e
+windowGradient.Rotation = 0
+windowGradient.Color = ColorSequence.new({
+    ColorSequenceKeypoint.new(0, Color3.fromRGB(255, 0, 0)),
+    ColorSequenceKeypoint.new(1, Color3.fromRGB(0, 100, 255))
+})
+e.ImageTransparency = 0.3
 f.Name = "Resizer"
 f.Parent = e
 f.Active = true
@@ -127,6 +136,14 @@ g.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
 g.BorderSizePixel = 0
 g.Position = UDim2.new(0, 0, 0, 5)
 g.Size = UDim2.new(1, 0, 0, 15)
+-- Barra superior con degradado rojo -> rojo oscuro
+local barGradient = Instance.new("UIGradient")
+barGradient.Parent = g
+barGradient.Rotation = 0
+barGradient.Color = ColorSequence.new({
+    ColorSequenceKeypoint.new(0, Color3.fromRGB(255, 0, 0)),
+    ColorSequenceKeypoint.new(1, Color3.fromRGB(180, 0, 0))
+})
 h.Name = "Toggle"
 h.Parent = g
 h.BackgroundColor3 = Color3.new(1, 1, 1)
@@ -931,6 +948,15 @@ function bd:AddWindow(bi, bj)
     e:FindFirstChild("Title").Text = bi
     e.Size = UDim2.new(0, bj.min_size.X, 0, bj.min_size.Y)
     e.ZIndex = e.ZIndex + bc * 10
+    -- Añadir degradado vertical rojo -> azul a la ventana
+    local winGradient = Instance.new("UIGradient")
+    winGradient.Parent = e
+    winGradient.Rotation = 0
+    winGradient.Color = ColorSequence.new({
+        ColorSequenceKeypoint.new(0, Color3.fromRGB(255, 0, 0)),
+        ColorSequenceKeypoint.new(1, Color3.fromRGB(0, 100, 255))
+    })
+    e.ImageTransparency = 0.3
     do
         local g = e:FindFirstChild("Bar")
         local l = g:FindFirstChild("Title")
